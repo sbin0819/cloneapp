@@ -33,20 +33,19 @@ async function handler(
     },
   });
   if (phone) {
-    await twilioClient.messages.create({
-      messagingServiceSid: process.env.TWILIO_MSID,
-      to: process.env.MY_PHONE!,
-      body: `Your login token is ${payload}.`,
-    });
+    // await twilioClient.messages.create({
+    //   messagingServiceSid: process.env.TWILIO_MSID,
+    //   to: process.env.MY_PHONE!,
+    //   body: `Your login token is ${payload}.`,
+    // });
   } else if (email) {
-    const email = await mail.send({
-      from: 'sbinha123@gmail.com',
-      to: 'sbinha123@gmail.com',
-      subject: 'Your Carrot Market Verification EMAIL',
-      text: `Your token is ${payload}`,
-      html: `<h1>hi ${payload}</h1>`,
-    });
-    console.log(email);
+    // const email = await mail.send({
+    //   from: 'sbinha123@gmail.com',
+    //   to: 'sbinha123@gmail.com',
+    //   subject: 'Your Carrot Market Verification EMAIL',
+    //   text: `Your token is ${payload}`,
+    //   html: `<h1>hi ${payload}</h1>`,
+    // });
   }
   return res.json({
     ok: true,
