@@ -15,8 +15,8 @@ async function handler(
     const post = await client.post.create({
       data: {
         question,
-        latitude: latitude ? latitude : 100,
-        longitude: longitude ? longitude : 100,
+        latitude: latitude,
+        longitude: longitude,
         user: {
           connect: {
             id: user?.id,
@@ -33,15 +33,17 @@ async function handler(
     const {
       query: { latitude, longitude },
     } = req;
+    const parsedLatitude = parseFloat(latitude.toString());
+    const parsedLongitude = parseFloat(longitude.toString());
     const posts = await client.post.findMany({
       where: {
         latitude: {
-          gte: +latitude - 0.01,
-          lte: +latitude + 0.01,
+          gte: parsedLatitude - 0.01,
+          lte: parsedLatitude + 0.01,
         },
         longitude: {
-          gte: +longitude - 0.01,
-          lte: +longitude + 0.01,
+          gte: parsedLongitude - 0.01,
+          lte: parsedLongitude + 0.01,
         },
       },
       include: {

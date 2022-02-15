@@ -27,8 +27,8 @@ const Write: NextPage = () => {
     if (loading) return;
     post({
       ...data,
-      latitude: latitude ? latitude : 100,
-      longitude: longitude ? longitude : 100,
+      latitude: latitude,
+      longitude: longitude,
     });
   };
   useEffect(() => {

@@ -20,16 +20,8 @@ export default function useCoords() {
     new Promise((resolve) => setTimeout(resolve, timeToDelay));
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onSuccess, null, {
-      // maximumAge: 60000,
-      // timeout: 10000,
-      // enableHighAccuracy: true,
       enableHighAccuracy: true,
     });
-    // const time = async () => {
-    //   await wait(10000);
-    //   console.log('waitting over...');
-    // };
-    // time();
   }, []);
   return coords;
 }
