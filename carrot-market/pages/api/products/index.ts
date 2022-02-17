@@ -17,11 +17,6 @@ async function handler(
         },
       },
     });
-    // const products = await client.product.findMany({
-    //   include: {
-    //     favs: true,
-    //   },
-    // });
     res.json({
       ok: true,
       products,
@@ -37,7 +32,7 @@ async function handler(
         name,
         price: +price,
         description,
-        image: 'abcd',
+        image: 'photoId',
         user: {
           connect: {
             id: user?.id,

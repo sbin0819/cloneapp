@@ -12,8 +12,20 @@ async function handler(
   } = req;
 
   const sales = await client.sale.findMany({
-    where: { userId: user?.id },
-    include: { product: true },
+    where: {
+      userId: user?.id,
+    },
+    include: {
+      product: {
+        include: {
+          _count: {
+            select: {
+              favs: true,
+            },
+          },
+        },
+      },
+    },
   });
   res.json({
     ok: true,
@@ -21,4 +33,9 @@ async function handler(
   });
 }
 
-export default withApiSession(withHandler({ method: ['GET'], handler }));
+export default withApiSession(
+  withHandler({
+    method: ['GET'],
+    handler,
+  }),
+);
