@@ -8,13 +8,18 @@ async function handler(
   res: NextApiResponse<ResponseType>,
 ) {
   if (req.method === 'GET') {
+    // const products = await client.product.findMany({
+    //   include: {
+    //     _count: {
+    //       select: {
+    //         favs: true,
+    //       },
+    //     },
+    //   },
+    // });
     const products = await client.product.findMany({
       include: {
-        _count: {
-          select: {
-            favs: true,
-          },
-        },
+        favs: true,
       },
     });
     res.json({
@@ -24,7 +29,7 @@ async function handler(
   }
   if (req.method === 'POST') {
     const {
-      body: { name, price, description },
+      body: { name, price, description, photoId },
       session: { user },
     } = req;
     const product = await client.product.create({
@@ -32,7 +37,7 @@ async function handler(
         name,
         price: +price,
         description,
-        image: 'xx',
+        image: photoId,
         user: {
           connect: {
             id: user?.id,
@@ -48,5 +53,8 @@ async function handler(
 }
 
 export default withApiSession(
-  withHandler({ method: ['POST', 'GET'], handler }),
+  withHandler({
+    method: ['GET', 'POST'],
+    handler,
+  }),
 );
