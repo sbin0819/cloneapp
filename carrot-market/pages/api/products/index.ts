@@ -8,20 +8,20 @@ async function handler(
   res: NextApiResponse<ResponseType>,
 ) {
   if (req.method === 'GET') {
-    // const products = await client.product.findMany({
-    //   include: {
-    //     _count: {
-    //       select: {
-    //         favs: true,
-    //       },
-    //     },
-    //   },
-    // });
     const products = await client.product.findMany({
       include: {
-        favs: true,
+        _count: {
+          select: {
+            favs: true,
+          },
+        },
       },
     });
+    // const products = await client.product.findMany({
+    //   include: {
+    //     favs: true,
+    //   },
+    // });
     res.json({
       ok: true,
       products,
@@ -37,7 +37,7 @@ async function handler(
         name,
         price: +price,
         description,
-        image: photoId,
+        image: 'abcd',
         user: {
           connect: {
             id: user?.id,

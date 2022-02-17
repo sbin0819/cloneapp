@@ -4,8 +4,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import client from '@libs/server/client';
 import withHandler, { ResponseType } from '@libs/server/withHandler';
 
-mail.setApiKey(process.env.SENDGRID_KEY as string);
-const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+// mail.setApiKey(process.env.SENDGRID_KEY as string);
+// const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 async function handler(
   req: NextApiRequest,

@@ -28,8 +28,7 @@ const Home: NextPage = () => {
             title={product.name}
             price={product.price}
             comments={1}
-            // hearts={product?._count?.favs || 0}
-            hearts={product?.favs.length || 0}
+            hearts={product?._count?.favs || 0}
           />
         ))}
         <FloatingButton href="/products/upload">
