@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import useMutation from '@libs/client/useMutation';
 import useUser from '@libs/client/useUser';
 import { cls } from '@libs/client/utils';
@@ -5,6 +6,7 @@ import { Product, User } from '@prisma/client';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import products from 'pages/api/products';
 import useSWR, { useSWRConfig } from 'swr';
 import Button from '../../components/button';
 import Layout from '../../components/layout';
@@ -53,9 +55,19 @@ const ItemDetail: NextPage = () => {
     <Layout canGoBack>
       <div className="px-4  py-4">
         <div className="mb-8">
-          <div className="h-96 bg-slate-300" />
+          <img
+            src={`https://imagedelivery.net/PvCu-P_i7BTC8sCE6M5DWA/${data?.product?.image}/public`}
+            className="h-96 bg-slate-300"
+            // layout="fill"
+          />
           <div className="flex cursor-pointer py-3 border-t border-b items-center space-x-3">
-            <div className="w-12 h-12 rounded-full bg-slate-300" />
+            <Image
+              src={`https://imagedelivery.net/PvCu-P_i7BTC8sCE6M5DWA/${data?.product?.user?.avatar}/avatar`}
+              className="w-12 h-12 rounded-full bg-slate-300"
+              alt="avatar"
+              width={48}
+              height={48}
+            />
             <div>
               <p className="text-sm font-medium text-gray-700">
                 {data?.product?.user?.name}
