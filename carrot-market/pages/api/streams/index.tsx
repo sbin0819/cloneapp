@@ -11,9 +11,29 @@ async function handler(
     session: { user },
     body: { name, price, description },
   } = req;
+  const {
+    result: {
+      uid,
+      rtmps: { streamKey, url },
+    },
+  } = await (
+    await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ID}/stream/live_inputs`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${process.env.CF_STREAM}`,
+        },
+        body: `{"meta": {"name":"${name}"},"recording": { "mode": "automatic", "timeoutSeconds": 10 }}`,
+      },
+    )
+  ).json();
   if (req.method == 'POST') {
     const stream = await client.stream.create({
       data: {
+        cloudflareId: uid,
+        cloudflareKey: streamKey,
+        cloudflareUrl: url,
         name,
         price,
         description,
@@ -29,8 +49,8 @@ async function handler(
 
   if (req.method == 'GET') {
     const streams = await client.stream.findMany({
-      take: 10,
-      skip: 10,
+      // take: 10,
+      // skip: 10,
     });
     res.json({ ok: true, streams });
   }
