@@ -7,6 +7,15 @@ import useMutation from '@libs/client/useMutation';
 import { cls } from '@libs/client/utils';
 import { useRouter } from 'next/router';
 
+import dynamic from 'next/dynamic';
+// const Bs = dynamic(
+//   () =>
+//     new Promise((resolve) =>
+//       setTimeout(() => resolve(import('@components/bs')), 2000),
+//     ),
+//   { ssr: false,suspense: true loading: () => <span>loading...</span> },
+// );
+
 interface EnterForm {
   email?: string;
   phone?: string;
@@ -119,14 +128,17 @@ const Enter: NextPage = () => {
                 />
               ) : null}
               {method === 'phone' ? (
-                <Input
-                  register={register('phone')}
-                  name="phone"
-                  label="Phone number"
-                  type="number"
-                  kind="phone"
-                  required
-                />
+                <>
+                  {/* <Bs /> */}
+                  <Input
+                    register={register('phone')}
+                    name="phone"
+                    label="Phone number"
+                    type="number"
+                    kind="phone"
+                    required
+                  />
+                </>
               ) : null}
               {method === 'email' ? (
                 <Button text={loading ? 'Loading' : 'Get login link'} />
