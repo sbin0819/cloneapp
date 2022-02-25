@@ -22,11 +22,12 @@ export default function ProductList({ kind }: ProductListProps) {
       {data[kind]?.map((record: any) => (
         <Item
           id={record.id}
-          comments={1}
+          // comments={1}
           key={record.id}
           title={record.product.name}
           price={record.product.price}
-          hearts={record.product._count.favs}
+          image={record.product.image}
+          hearts={record.product._count.favs || 0}
         />
       ))}
     </>
