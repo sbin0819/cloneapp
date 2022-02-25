@@ -43,7 +43,7 @@ export async function getStaticProps() {
     return { ...matter(content).data, slug };
   });
   return {
-    props: { posts: blogPosts },
+    props: { posts: blogPosts.reverse() },
   };
 }
 

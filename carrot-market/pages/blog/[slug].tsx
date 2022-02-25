@@ -1,5 +1,5 @@
 import Layout from '@components/layout';
-import { readdirSync, readFileSync } from 'fs';
+import { readdirSync } from 'fs';
 import matter from 'gray-matter';
 import { GetStaticProps, NextPage } from 'next';
 import remarkHtml from 'remark-html';
